@@ -18,13 +18,13 @@ A modern web app that extracts the top 10 dominant colors from any uploaded imag
 ## 🖼️ Demo
 
 ### 🏠 Homepage
-![Homepage](screenshots/home.png)
+![Homepage](Screenshots/home.png)
 
 ### 📤 Image Upload Preview
-![Preview](screenshots/preview.png)
+![Preview](Screenshots/preview.png)
 
 ### 🎯 Extracted Color Palette
-![Result](screenshots/result.png)
+![Result](Screenshots/result.png)
 
 ---
 
