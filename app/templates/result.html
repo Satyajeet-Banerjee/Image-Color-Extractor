@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 text-white">
+
+<div class="max-w-6xl mx-auto p-6">
+
+    <h1 class="text-3xl font-bold mb-6">Your Palette</h1>
+
+    <!-- IMAGE -->
+    <img src="{{ url_for('static', filename='uploads/' + image) }}"
+         class="rounded-xl shadow-lg mb-8 w-80">
+
+    <!-- COLOR GRID -->
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6">
+        {% for color in colors %}
+        <div class="bg-slate-800 p-4 rounded-xl text-center shadow-lg hover:scale-105 transition">
+
+            <div class="w-full h-24 rounded-lg mb-3"
+                 style="background: {{color}};"></div>
+
+            <p class="text-sm font-mono">{{color}}</p>
+
+            <button onclick="copyColor('{{color}}')"
+                    class="mt-2 text-xs bg-indigo-500 px-2 py-1 rounded">
+                Copy
+            </button>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<script>
+function copyColor(color) {
+    navigator.clipboard.writeText(color);
+    alert("Copied " + color);
+}
+</script>
+
+</body>
+</html>

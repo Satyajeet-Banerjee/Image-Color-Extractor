@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Color Extractor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-900 text-white font-sans">
+
+<!-- NAVBAR -->
+<nav class="flex justify-between items-center p-6">
+    <h1 class="text-xl font-bold text-indigo-400">ColorAI</h1>
+</nav>
+
+<!-- HERO -->
+<section class="text-center mt-10">
+    <h1 class="text-4xl font-bold mb-4">
+        Extract Beautiful Color Palettes Instantly
+    </h1>
+    <p class="text-slate-400">
+        Upload any image and get top colors like a pro designer.
+    </p>
+</section>
+
+<!-- UPLOAD CARD -->
+<section class="flex justify-center mt-10">
+    <form method="POST" enctype="multipart/form-data"
+          class="bg-slate-800 p-8 rounded-2xl shadow-xl w-96 text-center">
+
+        <!-- UPLOAD BOX -->
+        <label id="drop-area"
+               class="block border-2 border-dashed border-slate-600 p-6 rounded-lg cursor-pointer hover:border-indigo-400 transition">
+
+            <input type="file" name="image" id="file-input" class="hidden" required>
+
+            <p id="upload-text" class="text-slate-400">
+                Click or drag image here
+            </p>
+        </label>
+
+        <!-- IMAGE PREVIEW -->
+        <div id="preview-container" class="mt-4 hidden">
+            <img id="preview"
+                 class="w-full h-48 object-cover rounded-lg shadow-md"/>
+        </div>
+
+        <!-- BUTTON -->
+        <button class="mt-6 w-full bg-indigo-500 hover:bg-indigo-600 transition p-3 rounded-lg">
+            Extract Colors
+        </button>
+
+        <!-- LOADER -->
+        <div id="loader" class="hidden mt-4">
+            <p class="text-indigo-400">Processing image...</p>
+        </div>
+
+    </form>
+</section>
+
+<!-- ✅ SCRIPTS -->
+<script>
+const form = document.querySelector("form");
+const dropArea = document.getElementById("drop-area");
+const fileInput = document.getElementById("file-input");
+const previewContainer = document.getElementById("preview-container");
+const previewImage = document.getElementById("preview");
+const uploadText = document.getElementById("upload-text");
+
+// SHOW LOADER
+form.addEventListener("submit", () => {
+    document.getElementById("loader").classList.remove("hidden");
+});
+
+// HANDLE FILE SELECT + PREVIEW
+fileInput.addEventListener("change", handleFile);
+
+function handleFile() {
+    const file = fileInput.files[0];
+
+    if (file) {
+        uploadText.textContent = file.name;
+
+        const reader = new FileReader();
+
+        reader.onload = function (e) {
+            previewImage.src = e.target.result;
+            previewContainer.classList.remove("hidden");
+        };
+
+        reader.readAsDataURL(file);
+    }
+}
+
+// DRAG & DROP EVENTS
+dropArea.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    dropArea.classList.add("border-indigo-400");
+});
+
+dropArea.addEventListener("dragleave", () => {
+    dropArea.classList.remove("border-indigo-400");
+});
+
+dropArea.addEventListener("drop", (e) => {
+    e.preventDefault();
+    dropArea.classList.remove("border-indigo-400");
+
+    fileInput.files = e.dataTransfer.files;
+    handleFile();  // trigger preview
+});
+</script>
+
+</body>
+</html>
