@@ -40,7 +40,7 @@ A modern web app that extracts the top 10 dominant colors from any uploaded imag
 ## ⚙️ Installation
 
 ```bash
-git clone https://github.com/your-username/color-palette-extractor.git
+git clone https://github.com/Satyajeet-Banerjee/color-palette-extractor.git
 cd color-palette-extractor
 pip install -r requirements.txt
 python run.py
